@@ -14,6 +14,10 @@ if [ -z "$PLUGIN_SECURE" ]; then
     PLUGIN_SECURE="true"
 fi
 
+if [ -z "$PLUGIN_SSL_ALLOW" ]; then
+    PLUGIN_SSL_ALLOW="true"
+fi
+
 if [ -z "$PLUGIN_DEST_DIR" ]; then
     PLUGIN_DEST_DIR="/"
 fi
@@ -34,4 +38,4 @@ for i in "${in_arr[@]}"; do
     PLUGIN_INCLUDE_STR="$PLUGIN_INCLUDE_STR -x $i"
 done
 
-lftp -c "open -u $PLUGIN_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME; set ftp:ssl-force $PLUGIN_SECURE; set ftp:ssl-protect-data $PLUGIN_SECURE; mirror -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR"
+lftp -c "open -u $PLUGIN_USERNAME,$FTP_PASSWORD $PLUGIN_HOSTNAME; set ftp:ssl-force $PLUGIN_SECURE; set ftp:ssl-protect-data $PLUGIN_SECURE; set ssl-allow $PLUGIN_SSL_ALLOW; mirror -R $PLUGIN_INCLUDE_STR $PLUGIN_EXCLUDE_STR $(pwd)$PLUGIN_SRC_DIR $PLUGIN_DEST_DIR"
