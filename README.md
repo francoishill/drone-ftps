@@ -25,6 +25,8 @@ pipeline:
 ```yaml
 secure: true | false (default true)
 
+ssl_allow: true | false (default true)
+
 dest_dir: /path/to/dest (default /)
 
 src_dir: /path/to/src (default ./)
@@ -47,6 +49,7 @@ pipeline:
     hostname: example.com:21
     secrets: [ ftp_password ]
     secure: true
+    ssl_allow: true
     dest_dir: /var/www/mysite
     src_dir: /mysite/static
     exclude:
